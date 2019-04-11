@@ -45,6 +45,7 @@ urlpatterns = [
         name="report_pdf_preview",
     ),
     path("profile/<str:username>", views.user_profile, name="user_profile"),
+    path("profile/event-list", views.get_event_list, name="event_list"),
     path("send-pdf/<int:pk>", views.send_pdf, name="send_pdf"),
     path("admin/", admin.site.urls),
     path("signup/", views.SignUp.as_view(), name="signup"),

@@ -517,3 +517,12 @@ def activate(request, uidb64, token):
 # Model signal on_save -> PDF
 # /report/pdf/1 -> Retrieve from MEDIA_URL
 # /report/pdf/1/send_email -> Definitely send the Emails
+
+@api_view(["GET"])
+@login_required()
+def get_event_list(request):
+    if request.method == 'GET':
+        user = User.objects.filter(id=request.user.id)
+        event = Event.objects.filter(creator=user[0].id)
+        serializer = EventSerializer(event, many=True)
+        return Response(serializer.data)
