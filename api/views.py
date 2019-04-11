@@ -156,6 +156,10 @@ class ImageViewSet(viewsets.ModelViewSet):
             dept_list.append(items["department"])
         event_json["departments"] = dept_list
         print(event_json["departments"])
+
+        report_json["event_data"]["organizer"] = report_json["event_data"]["organizer"].split(",") or report_json["event_data"]["organizer"].split(", ") or report_json["event_data"]["organizer"].split("\r\n")
+        # print(report_json["event_data"])
+        print(report_json["feedback_url"])
         params = {
             "report_dict": report_json,
             "event_dict": event_json,
