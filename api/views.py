@@ -21,6 +21,8 @@ from .Email import send_mail
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timedelta
+from rest_framework import serializers
+from rest_framework.serializers import ValidationError
 
 
 """
@@ -159,7 +161,7 @@ class ImageViewSet(viewsets.ModelViewSet):
             "event_dict": event_json,
             "request": request,
         }
-        
+
 
         render_to_file("pdf.html", params, filename)
         headers = self.get_success_headers(serializer.data)
@@ -304,6 +306,7 @@ def event_list_by_date(request, date):
     List all Events according to date
     """
     if request.method == "GET":
+
         start_date = (datetime.strptime(date, '%Y-%m-%d') -timedelta(days = 1))
         start_date = start_date.strftime('%Y-%m-%d')
         end_date = (datetime.strptime(date, '%Y-%m-%d') + timedelta(days = 1))
@@ -314,6 +317,58 @@ def event_list_by_date(request, date):
         events = set([d.event for d in dates.all()])
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
+
+        # date_1 = Dates.objects.filter(start_date = date)
+        # date_2 = Dates.objects.filter(end_date = date)
+        # d3 = (datetime.strptime(date, '%Y-%m-%d') + timedelta(days = 1))
+        # d3 = d3.strftime('%Y-%m-%d')
+        # d4 = (datetime.strptime(date, '%Y-%m-%d') - timedelta(days = 1))
+        # d4 = d4.strftime('%Y-%m-%d')
+        # def date_return(obj):
+        #     events = set([d.event for d in obj.all()])
+        #     serializer = EventSerializer(events, many=True)
+        #     return Response(serializer.data)
+        #
+        #
+        # if date_1:
+        #     if date_2:
+        #         date_7 = date_1.union(date_2)
+        #         date_return(date_7)
+        #     date_return(date_1)
+        #
+        # elif date_2:
+        #     date_return(date_2)
+        #
+        # else:
+        #     while(true):
+        #
+        #         date_3 = Dates.objects.filter(end_date = d3)
+        #         date_4 = Dates.objects.filter(start_date = d3)
+        #
+        #         if date_3 and date_4:
+        #             date_return(date_3)
+        #         elif date_3:
+        #             date_return(date_3)
+        #         elif date_4:
+        #             raise serializers.ValidationError(
+        #                 "Event DNE"
+        #             )
+        #
+        #         date_5 = Dates.objects.filter(end_date = d4)
+        #         date_6 = Dates.objects.filter(start_date = d4)
+        #
+        #         if date_5 and date_6:
+        #             date_return(date_6)
+        #         elif date_6:
+        #             date_return(date_6)
+        #         elif date_5:
+        #             raise serializers.ValidationError(
+        #                 "Event DNE"
+        #             )
+        #         d3 = (datetime.strptime(d3, '%Y-%m-%d') + timedelta(days = 1))
+        #         d3 = d3.strftime('%Y-%m-%d')
+        #         d4 = (datetime.strptime(d4, '%Y-%m-%d') - timedelta(days = 1))
+        #         d4 = d4.strftime('%Y-%m-%d')
 
 
 """
@@ -389,7 +444,7 @@ def month_report(request, month, year):
                 item.pop("dates")
         month_name = month_dict[month]
         filename = "media/csv_month/{}.csv".format(month_name)
-        
+
         # start_date = "2019-{}-01".format(month)
         # end_date = "2019-{}-31".format(month)
         start_date = (datetime.strptime("2019-{}-01".format(month), '%Y-%m-%d'))

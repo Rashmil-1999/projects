@@ -91,8 +91,8 @@ class Report(models.Model):
     after_event_description = models.TextField(null=True, blank=True)
     number_of_participants = models.IntegerField()
     attendance = models.ImageField()
-    expert_biodata = models.ImageField()
-    feedback_link = models.TextField()
+    expert_resume = models.FileField()
+    feedback_url = models.URLField(blank = True)
 
     def __str__(self):
         return self.event.__str__()
