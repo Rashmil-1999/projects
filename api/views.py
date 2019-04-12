@@ -448,7 +448,17 @@ def month_report(request, month, year):
                 item.pop("dates")
         month_name = month_dict[month]
         filename = "media/csv_month/{}.csv".format(month_name)
-
+        month_1 = [1,3,5,7,8,10,12]
+        month_2 = [4,6,9,11]
+        if month in month_1:
+            start_date = "2019-{}-01".format(month)
+            end_date = "2019-{}-31".format(month)  
+        elif month in month_1:
+            start_date = "2019-{}-01".format(month)
+            end_date = "2019-{}-30".format(month)  
+        else:
+            start_date = "2019-{}-01".format(month)
+            end_date = "2019-{}-28".format(month)  
         # start_date = "2019-{}-01".format(month)
         # end_date = "2019-{}-31".format(month)
         start_date = (datetime.strptime("2019-{}-01".format(month), '%Y-%m-%d'))

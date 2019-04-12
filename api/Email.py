@@ -22,6 +22,11 @@ def send_mail(filename, teacher_name, event_obj):
     # EventEndDate = eventDetail_list[2]
     # get the email object
     email = create_mail(EventName, EventStartDate, teacher_name, event_obj)
+    #attach expert resume
+    if event_obj.report.expert_resume.path:
+        expert_resume_path = event_obj.report.expert_resume.path
+        email.attach_file(expert_resume_path)
+        print("success")
     # change the file path to media directory
     file_path = "media/pdf/" + filename
     # attach the file to the email

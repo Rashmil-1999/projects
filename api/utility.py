@@ -5,6 +5,7 @@ from pdf_generation.task import import_data
 import json
 from .choices import RECIPIENTS
 from .models import *
+from .serializers import *
 
 month_dict = [
     "months",
@@ -46,7 +47,7 @@ def generate_csv(report_data, event_data):
 
 def get_recipients(event_obj):
     departments = Department.objects.filter(event=event_obj)
-    recipients = ["vikrantgajria@gmail.com"]
+    recipients = ["vikrantgajria@gmail.com","rashmilp833@gmail.com","paragvaid3496@gmail.com"]
     for department in departments:
         users = User.objects.filter(department=department.department)
         for user in users:
@@ -55,8 +56,12 @@ def get_recipients(event_obj):
     return recipients
 
 def get_dates(event_obj):
-    dates = list(Dates.objects.filter(event=event_obj))
-    print(str(dates[0].start))
-    start_date = str(dates[0].start)
-    start_date = start_date[0:10]
+    #dates = list(Dates.objects.filter(event=event_obj))
+    #print("get dates function called below")
+    event_serializer = EventSerializer(event_obj).data
+    #name = event_serializer["name"]
+    start_date = event_serializer["dates"][0]["start"][0:10]
+    #print(str(dates[0].start))
+    #start_date = str(dates[0].start)
+    #start_date = start_date[0:10]
     return start_date 
