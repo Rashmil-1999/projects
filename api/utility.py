@@ -56,7 +56,7 @@ def get_recipients(event_obj):
 
 def get_dates(event_obj):
     dates = list(Dates.objects.filter(event=event_obj))
-    
+    print(str(dates[0].start))
     start_date = str(dates[0].start)
     start_date = start_date[0:10]
     return start_date 

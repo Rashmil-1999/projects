@@ -422,6 +422,7 @@ def send_pdf(request, pk):
         event_obj = report.event
         name = report.event.name
         date = get_dates(event_obj)
+        print(date)
         filename = "{}${}.pdf".format(name,date)
         response = HttpResponse(content_type="text/pdf")
         teacher_name = request.user.first_name + " " + request.user.last_name
