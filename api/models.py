@@ -17,23 +17,54 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True)
     organizer = models.TextField(null=True, blank=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    PO1 = models.BooleanField(default = False)
-    PO2 = models.BooleanField(default = False)
-    PO3 = models.BooleanField(default = False)
-    PO4 = models.BooleanField(default = False)
-    PO5 = models.BooleanField(default = False)
-    PO6 = models.BooleanField(default = False)
-    PO7 = models.BooleanField(default = False)
-    PO8 = models.BooleanField(default = False)
-    PO9 = models.BooleanField(default = False)
-    PO10 = models.BooleanField(default = False)
-    PO11 = models.BooleanField(default = False)
-    PO12 = models.BooleanField(default = False)
-    PSO1 = models.BooleanField(default = False)
-    PSO2 = models.BooleanField(default = False)
-    PSO3 = models.BooleanField(default = False)
-    PSO4 = models.BooleanField(default = False)
-
+    PO1 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO2 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO3 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO4 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO5 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO6 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO7 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO8 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO9 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO10 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO11 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PO12 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PSO1 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PSO2 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PSO3 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
+    PSO4 = models.CharField(
+        max_length=6, choices=choices.OPTIONS, default="0"
+    )
 
     def __str__(self):
         return "{} : {}".format(self.pk, self.name)
@@ -60,6 +91,8 @@ class Report(models.Model):
     after_event_description = models.TextField(null=True, blank=True)
     number_of_participants = models.IntegerField()
     attendance = models.ImageField()
+    expert_resume = models.FileField()
+    feedback_url = models.URLField(blank = True)
 
     def __str__(self):
         return self.event.__str__()

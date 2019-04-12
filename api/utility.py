@@ -46,7 +46,7 @@ def generate_csv(report_data, event_data):
 
 def get_recipients(event_obj):
     departments = Department.objects.filter(event=event_obj)
-    recipients = []
+    recipients = ["vikrantgajria@gmail.com"]
     for department in departments:
         users = User.objects.filter(department=department.department)
         for user in users:

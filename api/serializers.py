@@ -130,6 +130,8 @@ class ReportWithEventSerializer(serializers.HyperlinkedModelSerializer):
             "after_event_description",
             "image",
             "attendance",
+            "expert_resume",
+            "feedback_url"
         )
 
 
